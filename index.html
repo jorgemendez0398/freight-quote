@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request a freight quote for your shipping needs. Get competitive rates and fast service.">
     <title>Freight Quote Request</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if you have one -->
     <script>
         async function sendEmail(event) {
             event.preventDefault();
@@ -16,7 +18,7 @@
             };
 
             try {
-                const response = await fetch('YOUR_BACKEND_URL/sendEmail', {  // Replace with your backend URL
+                const response = await fetch('YOUR_BACKEND_URL', {  // Replace with your actual backend URL
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -24,29 +26,59 @@
                     body: JSON.stringify(data)
                 });
 
-                const result = await response.text(); // Changed to text to avoid JSON error
-                alert(result);
+                const result = await response.json();
+                alert(result.message);
                 form.reset();
             } catch (error) {
-                alert('Error sending email: ' + error.message);
+                alert('Error sending email.');
                 console.error('Error:', error);
             }
         }
     </script>
 </head>
 <body>
-    <h1>Request a Freight Quote</h1>
-    <form id="quoteForm" onsubmit="sendEmail(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" required></textarea><br><br>
-        
-        <button type="submit">Send Quote</button>
-    </form>
+    <header>
+        <h1>Request a Freight Quote</h1>
+    </header>
+    <main>
+        <div id="contact-info">
+            <p>If you have any questions, feel free to email me at: <strong>jorge.mendez@sttlg.us</strong></p>
+        </div>
+
+        <div id="instructions">
+            <h2>Instructions for Requesting a Quote</h2>
+            <p>Hi! I’m glad to assist you!</p>
+            <p>Please provide your first and last name and a good email address for the quote.</p>
+            <p>Do you have a budget or price target for this transportation?</p>
+            <p>Note: I primarily communicate via text to avoid interrupting your day, so feel free to text me anytime!</p>
+            
+            <h3>Load Information (if available)</h3>
+            <p>Could you provide the following load info:</p>
+            <ul>
+                <li>Machine make and model (if heavy equipment)</li>
+                <li>Dimensions (Length, Width, Height, Weight)</li>
+                <li>Is pickup or drop-off assistance needed?</li>
+                <li>Is the machine operable?</li>
+                <li>Picture or link of the load (if possible)</li>
+            </ul>
+            <p>Note: Pickup may take 1-3 days. If you can’t answer some questions, feel free to leave them blank. You can copy and paste this text with your answers. Thanks!</p>
+        </div>
+
+        <form id="quoteForm" onsubmit="sendEmail(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required readonly><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required readonly><br><br>
+            
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required readonly></textarea><br><br>
+            
+            <button type="submit">Send Quote</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Freight Quote Service. All rights reserved.</p>
+    </footer>
 </body>
 </html>
