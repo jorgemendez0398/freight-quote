@@ -5,17 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freight Quote Request</title>
     <script>
-        function sendEmail(event) {
+        async function sendEmail(event) {
             event.preventDefault();
             const form = event.target;
-            const name = form.name.value;
-            const email = form.email.value;
-            const message = form.message.value;
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
 
-            const mailtoLink = `mailto:jorge.mendez@sttlg.us?subject=Freight Quote Request from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(email)}`;
+            try {
+                const response = await fetch('YOUR_BACKEND_URL/sendEmail', {  // Replace with your backend URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
 
-            window.location.href = mailtoLink;
-            form.reset();
+                const result = await response.text(); // Changed to text to avoid JSON error
+                alert(result);
+                form.reset();
+            } catch (error) {
+                alert('Error sending email: ' + error.message);
+                console.error('Error:', error);
+            }
         }
     </script>
 </head>
