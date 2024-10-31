@@ -5,32 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freight Quote Request</title>
     <script>
-        async function sendEmail(event) {
+        function sendEmail(event) {
             event.preventDefault();
             const form = event.target;
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
-            };
+            const name = form.name.value;
+            const email = form.email.value;
+            const message = form.message.value;
 
-            try {
-                const response = await fetch('/.netlify/functions/sendEmail', {  // Ensure this URL is correct
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+            const mailtoLink = `mailto:jorge.mendez@sttlg.us?subject=Freight Quote Request from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0D%0A%0D%0AFrom: ${encodeURIComponent(email)}`;
 
-                const result = await response.json();
-                alert(result.message);
-                form.reset();
-            } catch (error) {
-                alert('Error sending email.');
-                console.error('Error:', error);
-            }
+            window.location.href = mailtoLink;
+            form.reset();
         }
     </script>
 </head>
