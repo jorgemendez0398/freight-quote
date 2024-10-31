@@ -3,82 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Request a freight quote for your shipping needs. Get competitive rates and fast service.">
-    <title>Freight Quote Request</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file if you have one -->
-    <script>
-        async function sendEmail(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                message: formData.get('message')
-            };
-
-            try {
-                const response = await fetch('YOUR_BACKEND_URL', {  // Replace with your actual backend URL
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-                alert(result.message);
-                form.reset();
-            } catch (error) {
-                alert('Error sending email.');
-                console.error('Error:', error);
+    <title>Freight Quote Request | Fast & Reliable Shipping Services</title>
+    <meta name="description" content="Get fast and competitive freight quotes. Expert assistance for your transportation needs. Contact Jorge Mendez for a quote.">
+    <meta name="keywords" content="freight quote, transportation, shipping, logistics, freight rates, shipping quotes, load information">
+    <meta name="author" content="Jorge Mendez">
+    <link rel="canonical" href="https://<username>.github.io/freight-quote"> <!-- Replace <username> -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        h1, h2, h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-top: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.4em;
+            margin-top: 15px;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e7f3ff;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: square;
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.2em;
             }
         }
-    </script>
+    </style>
 </head>
 <body>
-    <header>
+    <div class="container">
         <h1>Request a Freight Quote</h1>
-    </header>
-    <main>
-        <div id="contact-info">
-            <p>If you have any questions, feel free to email me at: <strong>jorge.mendez@sttlg.us</strong></p>
-        </div>
-
-        <div id="instructions">
+        <p>Hi! I'm Jorge Mendez, and I'm here to assist you with your freight needs! Please follow the instructions below to send your quote request:</p>
+        
+        <div class="instructions">
             <h2>Instructions for Requesting a Quote</h2>
-            <p>Hi! I’m glad to assist you!</p>
-            <p>Please provide your first and last name and a good email address for the quote.</p>
+            <h3>1. Your Details:</h3>
+            <p>May I have your first and last name?</p>
+            <p>What is a good email address to send you the quote?</p>
             <p>Do you have a budget or price target for this transportation?</p>
-            <p>Note: I primarily communicate via text to avoid interrupting your day, so feel free to text me anytime!</p>
-            
-            <h3>Load Information (if available)</h3>
-            <p>Could you provide the following load info:</p>
+            <p>Note: I work mainly via text to avoid interrupting your day with multiple calls, so feel free to text me at any time!</p>
+
+            <h3>2. Load Information (if applicable):</h3>
+            <p>Could you provide the load info, please?</p>
             <ul>
-                <li>Machine make and model (if heavy equipment)</li>
-                <li>Dimensions (Length, Width, Height, Weight)</li>
+                <li>Machine make and model (if it's heavy equipment):</li>
+                <li>Dimensions (Length, Width, Height, Weight, if available):</li>
                 <li>Is pickup or drop-off assistance needed?</li>
                 <li>Is the machine operable?</li>
-                <li>Picture or link of the load (if possible)</li>
+                <li>Picture or link of the load (if possible):</li>
             </ul>
-            <p>Note: Pickup may take 1-3 days. If you can’t answer some questions, feel free to leave them blank. You can copy and paste this text with your answers. Thanks!</p>
+            <p>Note: Pickup may take 1-3 days. If you don’t have answers to some questions, feel free to leave them blank. You can copy and paste this text with your answers. Thanks!</p>
         </div>
 
-        <form id="quoteForm" onsubmit="sendEmail(event)">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required readonly><br><br>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required readonly><br><br>
-            
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="4" required readonly></textarea><br><br>
-            
-            <button type="submit">Send Quote</button>
-        </form>
-    </main>
-    <footer>
-        <p>&copy; 2024 Freight Quote Service. All rights reserved.</p>
-    </footer>
+        <h2>Contact Information</h2>
+        <p>If you have any questions or need immediate assistance, feel free to reach out:</p>
+        <p>Email: <a href="mailto:jorge.mendez@sttlg.us">jorge.mendez@sttlg.us</a></p>
+
+        <footer>
+            <p>&copy; 2024 Jorge Mendez. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
