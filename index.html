@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freight Quote Request</title>
+    <script>
+        async function sendEmail(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message')
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/sendEmail', {  // Ensure this URL is correct
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                alert(result.message);
+                form.reset();
+            } catch (error) {
+                alert('Error sending email.');
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Request a Freight Quote</h1>
+    <form id="quoteForm" onsubmit="sendEmail(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+        
+        <button type="submit">Send Quote</button>
+    </form>
+</body>
+</html>
